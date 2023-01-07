@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-O game</title>
+    <link rel="shortcut icon" href="xologo_vector_ange_1200x1200.webp" type="image/x-icon">
+</head>
+<body>
+<style>
+    body{
+        background-color: rgb(177, 172, 172);
+    }
+    .game{
+        width: 450px;
+        text-align: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: white;
+        margin: auto;
+        font-weight: 500;
+    
+    }
+    .title{
+        background-color: gray;
+        padding: 10px 0px ;
+        margin:  0px 0px  10px 0px;
+        position: relative;
+        width: 370px;
+        font-size: 50px;
+        color: yellow;
+    }
+    span{
+        color: yellow;
+    }
+    .sqaure{
+        width: 120px;
+        height: 120px;
+        background-color: gray;
+        float: left;
+        margin:2px;
+        font-size: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .sqaure:hover{
+        background-color: black;
+        cursor: pointer;
+    }
+    .text{
+        margin-top: 420px;
+        transform: translateX(-40px);
+    }
+    #btn{
+        color: yellow;
+        background-color: rgb(99, 97, 97);
+        padding: 10px;
+        text-decoration: none;
+        font-size: 20px;
+        border-radius: 20px;
+        border: 2px solid yellow;
+        cursor: pointer;
+        transition: 1s ease;
+    }
+    #btn:hover{
+        color: rgb(99, 97, 97);
+        background-color: yellow;
+        transform: scale(1);
+    }
+
+</style>
+    <div class="game">
+        <div class="title"><span>X O </span>Game</div>
+        <div class="sqaure" id="item1" onclick="game(this.id)" ></div>
+        <div class="sqaure" id="item2" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item3" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item4" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item5" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item6" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item7" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item8" onclick="game(this.id)"></div>
+        <div class="sqaure" id="item9" onclick="game(this.id)"></div>
+        <!-- footer start -->
+        <div class="footer">
+            <div class="text">
+                <a href="index.html"  id="btn">New Game</a>
+                <h3>Code By @ <span>Youssef waleed</span>
+                </h3>
+                <a target="_blank" href="https://www.instagram.com/youssef_waleed_232/"><img src="in.webp" width="40px"></a>
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=100084430575770"><img src="Facebook_icon.svg.png" width="40px"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let title = document.querySelector('.title');
+        let turn = 'x';
+        let sqaures = [];
+        function end(num1 , num2 , num3){
+            title.innerHTML=`${sqaures[num1]} winner`
+                document.getElementById('item'+ num1).style.background='black';
+                document.getElementById('item'+ num2).style.background='black';
+                document.getElementById('item'+ num3).style.background='black';
+                setInterval(function(){title.innerHTML += '.'},1000)
+                setTimeout(function(){location.reload()},4000)
+    
+        }
+        function win(){
+            for(let i = 1 ; i < 10 ; i++)
+            {
+                sqaures[i]  =  document.getElementById('item' + [i]).innerHTML;
+            }
+            if(sqaures[1] == sqaures[2] && sqaures[2] == sqaures[3] && sqaures[1] != '')
+            {
+                end(1,2,3)
+            }
+            else if(sqaures[4] == sqaures[5] && sqaures[5] == sqaures[6] && sqaures[4] != '')
+            {
+                end(4,5,6)
+            }
+            else if(sqaures[7] == sqaures[8] && sqaures[8] == sqaures[9] && sqaures[9] != '')
+            {
+                end(7,8,9)
+            }
+            else if(sqaures[1] == sqaures[4] && sqaures[4] == sqaures[7] && sqaures[4] != '')
+            {
+                end(1,4,7)
+            }
+            else if(sqaures[2] == sqaures[5] && sqaures[5] == sqaures[8] && sqaures[5] != '')
+            {
+                end(2,5,8)
+            }
+            else if(sqaures[3] == sqaures[6] && sqaures[6] == sqaures[9] && sqaures[6] != '')
+            {
+                end(3,6,9)
+            }
+            else if(sqaures[1] == sqaures[5] && sqaures[5] == sqaures[9] && sqaures[5] != '')
+            {
+                end(1,5,9)
+            }
+            else if(sqaures[3] == sqaures[5] && sqaures[5] == sqaures[7] && sqaures[5] != '')
+            {
+                end(3,5,7)
+            }
+        }
+        function game(id){
+            let elemant = document.getElementById(id);
+            if(turn === 'x' && elemant.innerHTML == '' )
+            {
+                elemant.innerHTML = 'x';
+                turn="o";
+                title.innerHTML='o'
+            }
+            else if(turn === 'o' && elemant.innerHTML == '' )
+            {
+                elemant.innerHTML='o';
+                turn = 'x'
+                title.innerHTML = 'x'
+            }
+            win()
+        }
+
+    </script>
+</body>
+</html>
